@@ -1,1 +1,45 @@
-index.php
+<html>
+    <head>
+        <title>留言板-1024编程实验室</title>
+        <meta charset='utf-8' />
+	
+        <style>
+            .content,.list{
+				width:800px;
+				margin:10px auto;
+				background:#eee;
+			}
+			textarea{
+				width:100%;
+				height:100px;
+				margin-bottom:10px;
+			}
+			.user{
+				float:left;
+			}
+			.submit{
+				float:right;
+			}
+			.msg{
+				
+				border:green 1px  solid ;
+			}
+			
+        </style>
+    </head>
+    <body>
+        <div class='content'>
+			<textarea placeholder='entry'></textarea>		
+			<input class='user' type='text'/>
+			<input class='submit' type='submit' value='submit'/ >
+			<div style='clear:both'></div>
+		</div>
+		<div class='list'>
+			<div class='msg'>
+				<p>user</p>
+				<p>content</p>
+			</div>			
+		</div>
+    </body>
+</html>
+
