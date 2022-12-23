@@ -1,1 +1,14 @@
-1
+<?php
+$dsn='mysql:dbname=php10;host=localhost';
+$pdo=new PDO($dsn,'root','root');
+function write($sql,$pdo){	
+	$sth=$pdo->prepare($sql);
+	$sth->execute();
+}
+function read($sql,$pdo){
+	$sth=$pdo->prepare($sql);
+	$sth->execute();
+	$rows=$sth->fetchAll();
+	return $rows;
+}
+?>
