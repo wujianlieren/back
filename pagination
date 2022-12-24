@@ -1,0 +1,77 @@
+<?php
+include 'db.php';
+$sql='select count(*) as t from test';
+$total=$db->read($sql)[0]['t'];
+$pageNum=5;
+$pageMax=ceil($total/$pageNum);
+$page=$_GET['page'] ?? 1;
+$offset=($page-1)*$pageNum;
+$sql="select * from test order by id desc limit $offset,5";
+$rows=$db->read($sql);
+?>
+<html>
+    <head>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" >
+        <title>12</title>
+        <meta charset='utf-8'/>
+        <style>
+            #add,#list{
+                width:800px;
+                margin:0 auto;
+            }
+            textarea{
+                width:100%;
+                height:100px;
+                margin-bottom:10px;
+            }
+            .text{
+                float:left;
+            }
+            .btn{
+                float:right;
+            }
+            .msg{
+                border:1px solid gray;
+                margin-top:10px;
+                padding:5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='add'>
+            <form action='save.php' method='GET'>
+                <textarea name='content'></textarea>
+                <input name='user' class='text' type='text'/>
+                <input class='btn' type='submit' value='submit'/>
+                <div style='clear:both'></div>
+            </form>
+        </div>
+        <div id='list'>
+			<?php
+			foreach($rows as $key=>$msg){
+				
+				
+			?>
+			<div class='msg'>
+                <p><? echo $msg['user'];?><p>
+                <p><? echo $msg['content']; ?><p>
+            </div>  
+			<?php
+			}
+			?>
+        </div>
+		<div class='row'>
+			<div class='col-12'>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<?php for($i=1;$i<=$pageMax;$i++): ?>
+							<li class="page-item">
+								<a class="page-link" href="index.php?page=<?php echo $i ?>"><?php echo $i ?></a>
+							</li>
+						<?php endfor ?>
+					</ul>
+				</nav>
+			</div>
+		</div>
+    </body>
+</html>
